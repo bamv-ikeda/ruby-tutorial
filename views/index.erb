@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="ja">
+  <head>
+    <meta charset="utf-8">
+    <title>郵便番号検索</title>
+  </head>
+  <body>
+    <h1>郵便番号検索</h1>
+    <h2>郵便番号を入力して検索</h2>
+    <form action="/" method="POST">
+      <input type="text" name="zip_code" placeholder="郵便番号を入力" required>
+      <input type="submit" name="search_zip_code" value="検索">
+    </form>
+    <% unless @results.empty? %>
+    <table border='1'>
+      <tr>
+        <th>郵便番号</th>
+        <th>都道府県</th>
+        <th>市区町村</th>
+        <th>町域名</th>
+      </tr>
+      <% @results.each do |result| %>
+      <tr>
+        <td><%= result[:zipcode] %></td>
+        <td><%= result[:address1] %></td>
+        <td><%= result[:address2] %></td>
+        <td><%= result[:address3] %></td>
+      </tr>
+      <% end %>
+    </table>
+    <% end %>
+    <% unless @message.nil? %>
+    <p style="color: red"><%= @message %></p>
+    <% end %>
+    <h2>検索した郵便番号一覧</h2>
+    <table border='1'>
+      <tr>
+        <th>id</th>
+        <th>郵便番号</th>
+        <th>都道府県</th>
+        <th>市区町村</th>
+        <th>町域名</th>
+        <th>作成日時</th>
+        <th>更新日時</th>
+      </tr>
+      <% @zip_codes.each do |row| %>
+      <tr>
+        <td><%= row[:id] %></td>
+        <td><%= row[:zip_code] %></td>
+        <td><%= row[:prefecture] %></td>
+        <td><%= row[:city] %></td>
+        <td><%= row[:town_area] %></td>
+        <td><%= row[:created_at].strftime('%F %T') %></td>
+        <td><%= row[:updated_at].strftime('%F %T') %></td>
+      </tr>
+      <% end %>
+    </table>
+  </body>
+</html>
