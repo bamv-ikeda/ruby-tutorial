@@ -16,4 +16,4 @@ CREATE TABLE zip_codes (
 COMMENT '郵便番号';
 
 -- テーブルを削除
-DROP TABLE zip_codes;
+-- DROP TABLE zip_codes;
